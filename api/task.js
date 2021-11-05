@@ -2,7 +2,7 @@
 
 //const memory = require('../data/memory.js');
 
-const add = require('../add.js');
+const add = require('./add.js');
 
 class Task {
   constructor (name, worker, date) {
@@ -14,6 +14,6 @@ class Task {
 
 module.exports = async (name, worker, date) => {
   const task = new Task(name, worker, date);
-  add('task', task);
-  return 'task addec';
+  await add('task', task);
+  return 'task added';
 };
