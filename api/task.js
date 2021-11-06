@@ -10,11 +10,4 @@ class Task {
   }
 }
 
-/*module.exports = async (name, worker, date) => {
-  const task = new Task(name, worker, date);
-  const message = await add('task', task);
-  //console.log(message);
-  return message;;
-};*/
-
 module.exports = Task;
