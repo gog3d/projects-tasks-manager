@@ -1,9 +1,10 @@
 'use strict';
 
-const memory = new Map();
+const memoryProjects = new Map();
 
 let count = 0;
 
-memory.set('count', count);
+memoryProjects.set('count', count);
+memoryProjects.set('name', 'memoryProjects');
 
-module.exports = memory;
+module.exports = memoryProjects;

@@ -1,9 +1,10 @@
 'use strict';
 
-const memory = new Map();
+const memoryTasks = new Map();
 
 let count = 0;
 
-memory.set('count', count);
+memoryTasks.set('count', count);
+memoryTasks.set('name', 'memoryTasks');
 
-module.exports = memory;
+module.exports = memoryTasks;

@@ -1,7 +1,5 @@
 'use strict';
 
-//const memory = require('../data/memory.js');
-
 const add = require('./add.js');
 
 class Task {
@@ -12,8 +10,11 @@ class Task {
   }
 }
 
-module.exports = async (name, worker, date) => {
+/*module.exports = async (name, worker, date) => {
   const task = new Task(name, worker, date);
-  await add('task', task);
-  return 'task added';
-};
+  const message = await add('task', task);
+  //console.log(message);
+  return message;;
+};*/
+
+module.exports = Task;
