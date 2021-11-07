@@ -10,4 +10,6 @@ class Task {
   }
 }
 
-module.exports = Task;
+module.exports = async (name, worker, date) => {
+  return new Task(name, worker, date);
+};
