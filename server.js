@@ -9,39 +9,46 @@ const PORT = 8000;
 const api = new Map();
 const apiPath = './api/';
 
-const cachFile = (name) => {
+const cacheFile = (name) => {
   const filePath = apiPath + name;
   const key = path.basename(filePath, '.js');
+  console.log(key);
+  try {
+    const libPath = require.resolve(filePath);
+    delete require.cache[libPath];
+  } catch (e) {
+    //console.error(e);
+    return;
+  }
   try {
     const method = require(filePath);
     api.set(key, method);
   } catch (e) {
     api.delete(key);
-    console.error(e);
+    //console.error(e);
   }
-  
-  try {
-  
-  } catch (e) {
-    console.error(e);
-    return;
-  }
-  
 };
 
 const cachFolder =  (path) => {
   fs.readdir(path, (err, files) => {
     if(err) return;
-    files.forEach(cachFile);
+    files.forEach(cacheFile);
   });
 };
 
+const watch = (path) => {
+  fs.watch(path, (eventType, file) => {
+    cacheFile(file);
+    console.log(eventType);
+  });
+};
+
+
 cachFolder(apiPath);
+watch(apiPath);
 
 const server = http.createServer(async (req, res) => {
   console.dir({ api });
-  //const tasks = api.get('read');
-  //console.log(await api.get('read')('task', 'all'));
   const task = await api.get('task')('task1', 'Oleg', 'date');
   console.log(await api.get('add')('task', {name: 'task1', worker: 'Oleg', date: 'date'}));
   console.log(await api.get('read')('task', 'all'));

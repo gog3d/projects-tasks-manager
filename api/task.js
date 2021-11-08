@@ -11,5 +11,6 @@ class Task {
 }
 
 module.exports = async (name, worker, date) => {
+  console.log('ewfwefw');
   return new Task(name, worker, date);
 };
