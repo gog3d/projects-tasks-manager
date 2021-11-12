@@ -8,10 +8,10 @@ const fn = (mem, id, object) => {
   const oldObj = mem.get(id);
   if (oldObj) {
     mem.set(id, object);
-    return `memory ${mem.get('name')} id: ${id} edit ${oldObj.name} to ${object.name}`;
-   } else {
+    return `memory ${mem.get('name')} id: ${id} edit to ${object.name}`;
+  } else {
     return `wrong id: ${id}`;
-   }
+  }
 };
 
 const routing = {

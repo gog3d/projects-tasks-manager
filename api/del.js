@@ -8,9 +8,9 @@ const fn = (mem, id) => {
   const obj = mem.get(id);
   if (mem.delete(id)) {
     return `${obj.name} id: ${id} deleted from ${mem.get('name')}`;
-   } else {
+  } else {
     return `wrong id: ${id}`;
-   }
+  }
 };
 
 const routing = {

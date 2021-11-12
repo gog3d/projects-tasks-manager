@@ -31,7 +31,7 @@ const cacheFile = (name) => {
 
 const cachFolder =  (path) => {
   fs.readdir(path, (err, files) => {
-    if(err) return;
+    if (err) return;
     files.forEach(cacheFile);
   });
 };
@@ -48,10 +48,6 @@ cachFolder(apiPath);
 watch(apiPath);
 
 const server = http.createServer(async (req, res) => {
-  console.dir({ api });
-  const task = await api.get('task')('task1', 'Oleg', 'date');
-  console.log(await api.get('add')('task', {name: 'task1', worker: 'Oleg', date: 'date'}));
-  console.log(await api.get('read')('task', 'all'));
   res.end('Hello');
 });
 

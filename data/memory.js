@@ -2,7 +2,7 @@
 
 const memory = new Map();
 
-let count = 0;
+const count = 0;
 
 memory.set('count', count);
 

@@ -1,9 +1,7 @@
 'use strict';
 
-const add = require('./add.js');
-
 class Task {
-  constructor (name, worker, date) {
+  constructor(name, worker, date) {
     this.name = name;
     this.worker = worker;
     this.date = date;
@@ -11,6 +9,6 @@ class Task {
 }
 
 module.exports = async (name, worker, date) => {
-  console.log('ewfwefw');
-  return new Task(name, worker, date);
+  const task = new Task(name, worker, date);
+  return task;
 };

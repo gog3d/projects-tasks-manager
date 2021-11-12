@@ -8,7 +8,7 @@ const fn = (mem, object) => {
   const count = mem.get('count') + 1;
   mem.set(count, object);
   mem.set('count', count);
-  return `${object.name} added to ${mem.get('name')}`
+  return `${object.name} added to ${mem.get('name')}`;
 };
 
 const routing = {
