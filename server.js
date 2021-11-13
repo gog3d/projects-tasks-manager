@@ -2,6 +2,7 @@
 
 const http = require('http');
 const fs = require('fs');
+//const fsPromises = require('fs/promises');
 const path = require('path');
 
 const PORT = 8000;
@@ -43,12 +44,19 @@ const watch = (path) => {
   });
 };
 
-
 cachFolder(apiPath);
 watch(apiPath);
 
 const server = http.createServer(async (req, res) => {
-  res.end('Hello');
+  const url = req.url;
+  if (url === '/') {
+    const staticPath = './static/';
+    const data = await fs.promises.readFile(`${staticPath}index.html`);
+    res.end(data);
+  } else if (url === '/api/read/') {
+    res.end(hello);
+  }
+  
 });
 
 server.listen(PORT, () => {

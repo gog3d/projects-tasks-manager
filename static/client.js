@@ -4,10 +4,11 @@ const buildApi = (apiName) = {
   const api = {};
   api[apiName] = (...args) = new Promises((resolve, reject) => {
     const url = `/api/${apiName}`;
+    console.log(url);
     fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      mode: 'cors',
+      //mode: 'cors',
       body: JSON.stringify(args),
       }
     ).then((res) => {
@@ -19,6 +20,8 @@ const buildApi = (apiName) = {
         resolve(res.json());
     });
   });
+  return api;
 };
 
-buildApi('hello');
+const api = buildApi('read');
+api.read('h', 'g');
