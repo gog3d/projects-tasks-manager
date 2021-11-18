@@ -37,6 +37,7 @@ const routing = {
 };
 
 module.exports = async (type, id) => {
+  console.log({ type, id });
   const obj = await routing[type](id);
   //console.log(obj);
   return obj;

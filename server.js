@@ -2,7 +2,7 @@
 
 const http = require('http');
 const fs = require('fs');
-//const fsPromises = require('fs/promises');
+const { readFile } = require('fs/promises');
 const path = require('path');
 
 const PORT = 8000;
@@ -47,16 +47,30 @@ const watch = (path) => {
 cachFolder(apiPath);
 watch(apiPath);
 
+setTimeout(()=>{}, 1000);
+
 const server = http.createServer(async (req, res) => {
-  const url = req.url;
-  if (url === '/') {
-    const staticPath = './static/';
-    const data = await fs.promises.readFile(`${staticPath}index.html`);
+  const url = req.url === '/' ? '/index.html' : req.url;
+  const [first, second] = url.substring(1).split('/');
+  console.log({ first, second });
+  if(first === 'api') {
+   // const result = await api[second];
+    console.log('api');
+    const buffer = [];
+    req.on('data', chunk => buffer.push(chunk));
+    req.on('end', async () => {
+      const args = buffer.join(',').toString();
+      console.log(args);
+      const method = api.get(second);
+      const result = await method(...args);
+      console.log(result);
+      res.end(JSON.stringify(result));
+    });
+    //res.end(JSON.stringify({name: 'server hello'}));
+  } else {
+    const data = await fs.promises.readFile(`static/${first}`);
     res.end(data);
-  } else if (url === '/api/read/') {
-    res.end(hello);
   }
-  
 });
 
 server.listen(PORT, () => {
