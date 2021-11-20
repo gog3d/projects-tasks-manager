@@ -1,12 +1,14 @@
 'use strict';
 
-const buttonCreate = (name, id, clickEvent) => {
+const buttonCreate = (elementId, name, buttonId, clickEvent) => {
+  const el = document.getElementById(elementId);
   const button = document.createElement("button");
   button.innerHTML = name;
-  button.setAttribute('id', id);
+  button.setAttribute('id', buttonId);
   button.addEventListener('click', clickEvent);
-  console.log(`buton create ${name}`);
-  return button;
+  el.appendChild(button);
+  //console.log(`buton create ${name}`);
+  return `buton create ${name}`;
 }
 
 
