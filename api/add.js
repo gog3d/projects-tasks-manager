@@ -6,9 +6,9 @@ const memoryProjects = require('../data/memoryProjects.js');
 
 const fn = (mem, object) => {
   const count = mem.get('count') + 1;
-  mem.set(count, object);
+  mem.set(count.toString(), object);
   mem.set('count', count);
-  return `${object.name} added to ${mem.get('name')}`;
+  return `${object} added to ${mem}`;
 };
 
 const routing = {

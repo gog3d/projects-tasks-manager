@@ -13,7 +13,7 @@ const apiPath = './api/';
 const cacheFile = (name) => {
   const filePath = apiPath + name;
   const key = path.basename(filePath, '.js');
-  console.log(key);
+  //console.log(key);
   try {
     const libPath = require.resolve(filePath);
     delete require.cache[libPath];
@@ -52,24 +52,36 @@ setTimeout(()=>{}, 1000);
 const server = http.createServer(async (req, res) => {
   const url = req.url === '/' ? '/index.html' : req.url;
   const [first, second] = url.substring(1).split('/');
-  console.log({ first, second });
+  //console.log({ first, second });
   if(first === 'api') {
    // const result = await api[second];
-    console.log('api');
-    const buffer = [];
-    req.on('data', chunk => buffer.push(chunk));
+    const body = [];
+    req.on('data', chunk => body.push(chunk));
     req.on('end', async () => {
-      const args = buffer.join(',').toString();
-      console.log(args);
+      const data = Buffer.concat(body).toString();
+      const args = JSON.parse(data);
+      //console.log({ args });
       const method = api.get(second);
       const result = await method(...args);
-      console.log(result);
-      res.end(JSON.stringify(result));
+      if(result === undefined){
+        console.log(`Result undefined, error arguments ${args} method  ${method.name}`);
+        res.end(JSON.stringify("Result undefined, error arguments"));
+      } else {
+        res.end(JSON.stringify(result));
+      }
     });
     //res.end(JSON.stringify({name: 'server hello'}));
   } else {
-    const data = await fs.promises.readFile(`static/${first}`);
-    res.end(data);
+    if (first.split('.')[1] === 'html') {
+      const data = await fs.promises.readFile(`static/${first}`);
+      //res.setHeader('X-Content-Type-Options', 'nosniff');
+      res.end(data);
+    } else {
+      const data = await fs.promises.readFile(`static/${first}`);
+      res.setHeader('X-Content-Type-Options', 'nosniff');
+      res.setHeader('content-type', 'application/javascript; charset=UTF-8');
+      res.end(data);
+   } 
   }
 });
 

@@ -1,4 +1,4 @@
-'use strict';
+import { buttonCreate } from './button.js';
 
 const buildApi = (methods) => {
   const api = {};
@@ -22,12 +22,28 @@ const buildApi = (methods) => {
   return api;
 };
 
-const api = buildApi(['task', 'read']);
+const api = buildApi(['add', 'del', 'edit', 'read', 'task']);
 
 const scenario = async () => {
-  const task = await api.task('task1', 'Oleg', '03-12-1979');
-  const read = await api.read('task', '1');
-  console.log({task, read});
+  const div = document.getElementById('button');
+  const clEv = async () => {
+    let task = await api.task('task', 'Button', '03-12-1979');
+    await api.add('task', task);
+  };
+  const but = buttonCreate('HELLO', 'button1', clEv);
+  div.appendChild(but);
+  let task = await api.task('task1', 'Oleg', '03-12-1979');
+  await api.add('task', task);
+  task = await api.task('task2', 'Ivan', '03-12-1979');
+  await api.add('task', task);
+  const readAll = await api.read('task', 'all');
+  console.dir(readAll);
+  let read = await api.read('task', '1');
+  console.dir(read);
+  read = await api.read('task', '2');
+  console.dir(read);
+  read = await api.read('task', '3');
+  console.dir(read);
 };
 
 scenario();

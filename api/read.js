@@ -18,7 +18,7 @@ const readId = (mem, id) => {
     const obj = mem.get(id);
     return  obj;
   } else {
-    console.err(`wrong id: ${id}`);
+    console.error(`Error: wrong id: ${id}`);
     return;
   }
 };
