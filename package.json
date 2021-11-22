@@ -2,7 +2,7 @@
   "name": "projects-tasks-manager-http",
   "private": true,
   "version": "0.0.1",
-  "author": "Gluhov Oleg "gluhovog3d@gmail.com"",
+  "author": "Gluhov Oleg <gluhovog3d@gmail.com>",
   "license": "",
   "scripts": {
     "test": "eslint ./",

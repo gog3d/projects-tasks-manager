@@ -1,3 +1,4 @@
 node_modules
+testing
 *.log
 .DS_Store
