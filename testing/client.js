@@ -1,32 +1,52 @@
-'use strict';
+import { buttonCreate } from './button.js';
 
-const obj = {name: 'Oleg'};
-const obj1 = {name: 'Oleg1'};
+const buildApi = (methods) => {
+  const api = {};
+  for(const method of methods) {
+    const url = `/api/${method}`
+    api[method] = (...args) => new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'POST',
+        header: {'Content-Type' : 'aplication/json'},
+        body: JSON.stringify(args),
+      }).then((res) => {
+        const { status } = res;
+        if(status !== 200) {
+          reject(new Error(`Server error, ststus: ${status}`));
+        } else {
+          resolve(res.json());
+        }
+      });
+    });
+  }
+  return api;
+};
 
-const fetchFn = (obj) => fetch('/api/read', {
-  method: 'POST',
-  header: {'Content-Type': 'application/json'},
-  body: JSON.stringify(obj),
-});
+const api = buildApi(['add', 'del', 'edit', 'read', 'task']);
 
-const fetchFn2 = (obj) => new Promise((resolve, reject) => {
-  fetch('/api/task', {
-    method: 'POST',
-    header: {'Content-Type': 'application/json'},
-    body: JSON.stringify(obj),
-  }).catch((e) =>{
-    console.log('error ' + e);
-  }).then(res => {
-    resolve(res.json());
-  });
-});
+const scenario = async () => {
+  const taskCreate = async () => {
+    const task = await api.task('task', 'Button', '03-12-1979');
+    await api.add('task', task);
+  };
+  const readAll = async () => {
+     await api.read('task', 'all')
+  };
+  buttonCreate('button', 'addTask', 'button1', taskCreate);
+  buttonCreate('button', 'readAllTask', 'button1', readAll);
+  
+  /*let task = await api.task('task1', 'Oleg', '03-12-1979');
+  await api.add('task', task);
+  task = await api.task('task2', 'Ivan', '03-12-1979');
+  await api.add('task', task);
+  const readAll = await api.read('task', 'all');
+  console.dir(readAll);
+  let read = await api.read('task', '1');
+  console.dir(read);
+  read = await api.read('task', '2');
+  //console.dir(read);
+  //read = await api.read('task', '3');
+  //console.dir(read);*/
+};
 
-
-fetchFn(obj).then((res) => {
-  res.json().then(data => {
-     console.log(data);
-  })
-});
-
-const fn3 = fetchFn2(obj1);
-fn3.then(data=>console.log(data));
+scenario();

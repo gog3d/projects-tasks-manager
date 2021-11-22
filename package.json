@@ -1,9 +1,9 @@
 {
-  "name": "example",
+  "name": "projects-tasks-manager-http",
   "private": true,
-  "version": "1.0.5",
-  "author": "Timur Shemsedinov <timur.shemsedinov@gmail.com>",
-  "license": "MIT",
+  "version": "0.0.1",
+  "author": "Gluhov Oleg "gluhovog3d@gmail.com"",
+  "license": "",
   "scripts": {
     "test": "eslint ./",
     "ci": "eslint ./"

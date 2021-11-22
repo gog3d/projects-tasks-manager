@@ -24,30 +24,13 @@ const buildApi = (methods) => {
 
 const api = buildApi(['add', 'del', 'edit', 'read', 'task']);
 
-const scenario = async () => {
-  //const div = document.getElementById('button');
-  const taskCreate = async () => {
-    const task = await api.task('task', 'Button', '03-12-1979');
-    await api.add('task', task);
-  };
-  const readAll = async () => {
-     await api.read('task', 'all')
-  };
-  buttonCreate('button', 'addTask', 'button1', taskCreate);
-  buttonCreate('button', 'readAllTask', 'button1', readAll);
-  
-  /*let task = await api.task('task1', 'Oleg', '03-12-1979');
-  await api.add('task', task);
-  task = await api.task('task2', 'Ivan', '03-12-1979');
-  await api.add('task', task);
-  const readAll = await api.read('task', 'all');
-  console.dir(readAll);
-  let read = await api.read('task', '1');
-  console.dir(read);
-  read = await api.read('task', '2');
-  //console.dir(read);
-  //read = await api.read('task', '3');
-  //console.dir(read);*/
-};
 
-scenario();
+const taskCreate = async () => {
+const task = await api.task('task', 'Button', '03-12-1979');
+  await api.add('task', task);
+};
+const readAll = async () => {
+  await api.read('task', 'all');
+};
+buttonCreate('button', 'addTask', 'button1', taskCreate);
+buttonCreate('button', 'readAllTask', 'button1', readAll);
