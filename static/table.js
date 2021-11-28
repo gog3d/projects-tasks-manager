@@ -3,15 +3,12 @@
 const schemaTable = {
   tagName: 'table',
   childrens: ['thead', 'tbody', 'tfoot'],
-  //thead: [],
-  //tbody: [],
-  //tfoot: [],
   attributes: {
-    id: 'tableId',
-    'class': 'tableClass',
+    id: '',
+    'class': '',
   },
   properties: {},
-  methods: {},
+  insertRow: function(x) {return this.attributes.id + x},
 };
 
 export { schemaTable };

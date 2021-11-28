@@ -33,8 +33,8 @@ const task = await api.task('task', 'Button', '03-12-1979');
 const readAll = async () => {
   await api.read('task', 'all');
 };
+
 buttonCreate('button', 'addTask', 'button1', taskCreate);
 buttonCreate('button', 'readAllTask', 'button1', readAll);
-creator(schemaTable, 'table');
-
-
+const table1 = creator('tbId', 'tbClass', schemaTable, 'table');
+console.log(table1.insertRow('insert'));
