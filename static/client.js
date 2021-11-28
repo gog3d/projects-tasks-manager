@@ -1,4 +1,6 @@
 import { buttonCreate } from './button.js';
+import { schemaTable } from './table.js';
+import { creator } from './creator.js';
 
 const buildApi = (methods) => {
   const api = {};
@@ -24,7 +26,6 @@ const buildApi = (methods) => {
 
 const api = buildApi(['add', 'del', 'edit', 'read', 'task']);
 
-
 const taskCreate = async () => {
 const task = await api.task('task', 'Button', '03-12-1979');
   await api.add('task', task);
@@ -34,3 +35,6 @@ const readAll = async () => {
 };
 buttonCreate('button', 'addTask', 'button1', taskCreate);
 buttonCreate('button', 'readAllTask', 'button1', readAll);
+creator(schemaTable, 'table');
+
+
