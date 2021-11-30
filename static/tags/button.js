@@ -1,6 +1,6 @@
 'use strict';
 
-const buttonCreate = (elementId, name, buttonId, clickEvent) => {
+export default (elementId, name, buttonId, clickEvent) => {
   const el = document.getElementById(elementId);
   const button = document.createElement("button");
   button.innerHTML = name;
@@ -10,7 +10,3 @@ const buttonCreate = (elementId, name, buttonId, clickEvent) => {
   //console.log(`buton create ${name}`);
   return `buton create ${name}`;
 }
-
-
-export { buttonCreate };
-

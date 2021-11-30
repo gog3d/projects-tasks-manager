@@ -52,7 +52,7 @@ setTimeout(()=>{}, 1000);
 const server = http.createServer(async (req, res) => {
   const url = req.url === '/' ? '/index.html' : req.url;
   const [first, second] = url.substring(1).split('/');
-  //console.log({ first, second });
+  console.log({ first, second });
   if(first === 'api') {
    // const result = await api[second];
     const body = [];
@@ -71,6 +71,11 @@ const server = http.createServer(async (req, res) => {
       }
     });
     //res.end(JSON.stringify({name: 'server hello'}));
+  } else if(first === 'tags') {
+    const data = await fs.promises.readFile(`static/${first}/${second}`);
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('content-type', 'application/javascript; charset=UTF-8');
+    res.end(data);
   } else {
     if (first.split('.')[1] === 'html') {
       const data = await fs.promises.readFile(`static/${first}`);
@@ -81,7 +86,7 @@ const server = http.createServer(async (req, res) => {
       res.setHeader('X-Content-Type-Options', 'nosniff');
       res.setHeader('content-type', 'application/javascript; charset=UTF-8');
       res.end(data);
-   } 
+   }
   }
 });
 

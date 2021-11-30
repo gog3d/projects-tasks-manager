@@ -1,5 +1,5 @@
-import { buttonCreate } from './button.js';
-import { schemaTable } from './table.js';
+import button from './tags/button.js';
+import table  from './tags/table.js';
 import { creator } from './creator.js';
 
 const buildApi = (methods) => {
@@ -34,7 +34,9 @@ const readAll = async () => {
   await api.read('task', 'all');
 };
 
-buttonCreate('button', 'addTask', 'button1', taskCreate);
-buttonCreate('button', 'readAllTask', 'button1', readAll);
-const table1 = creator('tbId', 'tbClass', schemaTable, 'table');
-console.log(table1.insertRow('insert'));
+button('button', 'addTask', 'button1', taskCreate);
+button('button', 'readAllTask', 'button1', readAll);
+console.log({ table });
+//const tableEl = table();
+const table1 = creator('tbId', 'tbClass', table, 'table');
+//console.log(table1.insertRow('insert'));

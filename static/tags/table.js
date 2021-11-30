@@ -1,6 +1,7 @@
 'use strict';
 
-const schemaTable = {
+//const table = {
+export default {
   tagName: 'table',
   childrens: ['thead', 'tbody', 'tfoot'],
   attributes: {
@@ -8,7 +9,5 @@ const schemaTable = {
     'class': '',
   },
   properties: {},
-  insertRow: function(x) {return this.attributes.id + x},
 };
-
-export { schemaTable };
+//export { table };
