@@ -1,6 +1,5 @@
 'use strict';
 
-//const table = {
 export default {
   tagName: 'table',
   childrens: ['thead', 'tbody', 'tfoot'],
@@ -10,4 +9,3 @@ export default {
   },
   properties: {},
 };
-//export { table };
