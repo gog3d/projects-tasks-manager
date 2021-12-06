@@ -71,7 +71,7 @@ const server = http.createServer(async (req, res) => {
       }
     });
     //res.end(JSON.stringify({name: 'server hello'}));
-  } else if(first === 'tags') {
+  } else if(first === 'form') {
     const data = await fs.promises.readFile(`static/${first}/${second}`);
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('content-type', 'application/javascript; charset=UTF-8');
